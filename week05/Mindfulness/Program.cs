@@ -24,7 +24,7 @@ class Program
             Console.Write("Select a choice from the menu: ");
 
             string input = Console.ReadLine();
-            
+
             if (int.TryParse(input, out choice))
             {
                 Console.Clear();

@@ -56,12 +56,12 @@ public class GoalManager
     public void DisplayPlayerInfo()
     {
         Console.WriteLine($"You have {_score} points.");
-        
+
         // Gamification: Level system
         int level = CalculateLevel(_score);
         string title = GetPlayerTitle(level);
         Console.WriteLine($"Level: {level} - {title}");
-        
+
         int pointsToNextLevel = CalculatePointsToNextLevel(_score);
         if (pointsToNextLevel > 0)
         {
@@ -80,7 +80,7 @@ public class GoalManager
         Console.WriteLine("  5. Record Event");
         Console.WriteLine("  6. Quit");
         Console.Write("Select a choice from the menu: ");
-        
+
         string input = Console.ReadLine();
         if (int.TryParse(input, out int choice))
         {
@@ -105,7 +105,7 @@ public class GoalManager
         Console.WriteLine("  2. Eternal Goal");
         Console.WriteLine("  3. Checklist Goal");
         Console.Write("Which type of goal would you like to create? ");
-        
+
         string input = Console.ReadLine();
         if (!int.TryParse(input, out int goalType) || goalType < 1 || goalType > 3)
         {
@@ -115,10 +115,10 @@ public class GoalManager
 
         Console.Write("What is the name of your goal? ");
         string name = Console.ReadLine();
-        
+
         Console.Write("What is a short description of it? ");
         string description = Console.ReadLine();
-        
+
         Console.Write("What is the amount of points associated with this goal? ");
         if (!int.TryParse(Console.ReadLine(), out int points))
         {
@@ -143,14 +143,14 @@ public class GoalManager
                     Console.WriteLine("Invalid target value.");
                     return;
                 }
-                
+
                 Console.Write("What is the bonus for accomplishing it that many times? ");
                 if (!int.TryParse(Console.ReadLine(), out int bonus))
                 {
                     Console.WriteLine("Invalid bonus value.");
                     return;
                 }
-                
+
                 newGoal = new ChecklistGoal(name, description, points, target, bonus);
                 break;
         }
@@ -172,7 +172,7 @@ public class GoalManager
 
         ListGoalDetails();
         Console.Write("Which goal did you accomplish? ");
-        
+
         if (!int.TryParse(Console.ReadLine(), out int goalIndex) || goalIndex < 1 || goalIndex > _goals.Count)
         {
             Console.WriteLine("Invalid goal selection.");
@@ -180,7 +180,7 @@ public class GoalManager
         }
 
         Goal selectedGoal = _goals[goalIndex - 1];
-        
+
         if (selectedGoal.IsComplete() && !(selectedGoal is EternalGoal))
         {
             Console.WriteLine("This goal is already complete!");
@@ -308,7 +308,7 @@ public class GoalManager
             case "ChecklistGoal":
                 if (data.Length >= 6)
                 {
-                    ChecklistGoal checklistGoal = new ChecklistGoal(data[0], data[1], int.Parse(data[2]), 
+                    ChecklistGoal checklistGoal = new ChecklistGoal(data[0], data[1], int.Parse(data[2]),
                                                                    int.Parse(data[4]), int.Parse(data[3]));
                     checklistGoal.SetAmountCompleted(int.Parse(data[5]));
                     return checklistGoal;
@@ -329,7 +329,7 @@ public class GoalManager
     {
         string[] titles = {
             "Novice Dreamer",
-            "Aspiring Achiever", 
+            "Aspiring Achiever",
             "Determined Doer",
             "Focused Fighter",
             "Persistent Pursuer",
